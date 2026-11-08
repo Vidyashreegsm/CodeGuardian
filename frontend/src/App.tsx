@@ -23,7 +23,9 @@ import {
   X,
 } from "lucide-react";
 import "./App.css";
-
+const API_BASE_URL = (
+  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000"
+).replace(/\/$/, "");
 const initialCode = `def divide(a, b):
     return a / b
 
@@ -69,7 +71,7 @@ function App() {
     const checkBackend = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/health"
+          `${API_BASE_URL}/api/health`
         );
 
         if (!response.ok) {
@@ -134,7 +136,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/review",
+        `${API_BASE_URL}/api/review`,
         {
           method: "POST",
           headers: {
